@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/ClockGame.unity
+    guid: 4de3bcaed57e9b649ac3d130659135e3
+  - enabled: 1
+    path: Assets/ClockGame2.unity
+    guid: dc5856c80da910249a6e3d49c5a4f4a3
+  - enabled: 1
+    path: Assets/ClockHintScene.unity
+    guid: 7c7839f972279894480dc094cb169f38
   m_configObjects: {}
