@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 //강의실 화면에서 클릭시 각 게임 가져오기.
-public class GameDirector : MonoBehaviour
+public class MainGameDirector : MonoBehaviour
 {
     GameObject clock;
     GameObject pencil;
@@ -41,6 +41,7 @@ public class GameDirector : MonoBehaviour
           //pencil_clear == 같은그림맞추기 게임 clear 여부.
           if(!pencil_clear && pencil.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
             Debug.Log("Pencil clicked!");
+            SceneManager.LoadScene("ItemGameScene");
           }
           //test_paper_clear : F피하기 게임 clear여부.
           if(!test_paper_clear && test_paper.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
