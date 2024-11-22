@@ -39,27 +39,21 @@ public class MainGameDirector : MonoBehaviour
           }
           //pencil_clear == 같은그림맞추기 게임 clear 여부.
           if(!pencil_clear && pencil.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
-            Debug.Log("Pencil clicked!");
             SceneManager.LoadScene("ItemGameScene");
           }
           //test_paper_clear : F피하기 게임 clear여부.
           if(!test_paper_clear && test_paper.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
-            Debug.Log("test_paper clicked!");
+            SceneManager.LoadScene("GameExplain");
           }
           
           //퀴즈맞추기 최종 게임.
-          // if(door.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
-          //   if(clock_clear && pencil_clear && test_paper_clear){
-          //     SceneManager.LoadScene("lastGame"); //앞 3게임이 모두 클리어할 경우만 scene전환.
-          //   }else{ //하나라도 아니면 못넘어감.
-          //     Debug.Log("아직 종강할 때가 아니야!~");
-          //   }
-          // }
+          if(door.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
+            if(clock_clear && pencil_clear && test_paper_clear){
+              SceneManager.LoadScene("lastGame"); //앞 3게임이 모두 클리어할 경우만 scene전환.
+            }else{ //하나라도 아니면 못넘어감.
+              Debug.Log("아직 종강할 때가 아니야!~");
+            }
+          }
         }
-
-        // 모든 게임 클리어시 마지막 게임으로 이동.
-        // if(clock_clear && pencil_clear && test_paper_clear){
-        //   SceneManager.LoadScene("LastGame");
-        // }
     }
 }
