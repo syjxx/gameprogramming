@@ -35,8 +35,7 @@ public class MainGameDirector : MonoBehaviour
           //Collider2D.OverlapPoint()로 오브젝트가 클릭된 범위 내에 있는지 확인.
           if(!clock_clear && clock.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
             //해당 Scene에서 clear시 GameDirector.clock_clear = true로 변환해주기.
-            Debug.Log("clock clicked!");
-            // SceneManager.LoadScene("");
+            SceneManager.LoadScene("ClockGame");
           }
           //pencil_clear == 같은그림맞추기 게임 clear 여부.
           if(!pencil_clear && pencil.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
