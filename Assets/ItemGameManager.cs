@@ -1,18 +1,18 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // ¾À ÀüÈ¯
+using UnityEngine.SceneManagement; // ì”¬ ì „í™˜
 
 public class ItemGameManager : MonoBehaviour
 {
-    public static ItemGameManager Instance; // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
+    public static ItemGameManager Instance; // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
 
-    public Transform[] itemDisplayPositions; // ¼öÁıµÈ ¾ÆÀÌÅÛ Ç¥½Ã À§Ä¡
-    public Sprite[] itemIcons; // ¾ÆÀÌÅÛ ¾ÆÀÌÄÜ ÀÌ¹ÌÁö
-    private string targetItem = ""; // ¸ñÇ¥ ¾ÆÀÌÅÛ
-    private int collectedCount = 0; // ¼öÁıÇÑ ¾ÆÀÌÅÛ °³¼ö
+    public Transform[] itemDisplayPositions; // ìˆ˜ì§‘ëœ ì•„ì´í…œ í‘œì‹œ ìœ„ì¹˜
+    public Sprite[] itemIcons; // ì•„ì´í…œ ì•„ì´ì½˜ ì´ë¯¸ì§€
+    private string targetItem = ""; // ëª©í‘œ ì•„ì´í…œ
+    private int collectedCount = 0; // ìˆ˜ì§‘í•œ ì•„ì´í…œ ê°œìˆ˜
 
     void Awake()
     {
-        // ½Ì±ÛÅæ ¼³Á¤
+        // ì‹±ê¸€í†¤ ì„¤ì •
         if (Instance == null)
         {
             Instance = this;
@@ -27,43 +27,44 @@ public class ItemGameManager : MonoBehaviour
     {
         if (targetItem == "" || targetItem == itemName)
         {
-            // µ¿ÀÏÇÑ ¾ÆÀÌÅÛ ¼öÁı
-            targetItem = itemName; // ¸ñÇ¥ ¾ÆÀÌÅÛ ¼³Á¤
-            collectedCount++; // ¼öÁı °³¼ö Áõ°¡
-            UpdateItemDisplay(itemName); // UI ¾÷µ¥ÀÌÆ®
+            // ë™ì¼í•œ ì•„ì´í…œ ìˆ˜ì§‘
+            targetItem = itemName; // ëª©í‘œ ì•„ì´í…œ ì„¤ì •
+            collectedCount++; // ìˆ˜ì§‘ ê°œìˆ˜ ì¦ê°€
+            UpdateItemDisplay(itemName); // UI ì—…ë°ì´íŠ¸
 
             if (collectedCount >= 3)
             {
-                Debug.Log("°ÔÀÓ Å¬¸®¾î! NameSceneÀ¸·Î ÀüÈ¯µË´Ï´Ù.");
-                SceneManager.LoadScene("NameScene"); // NameSceneÀ¸·Î ÀüÈ¯
+                Debug.Log("ê²Œì„ í´ë¦¬ì–´! NameSceneìœ¼ë¡œ ì „í™˜ë©ë‹ˆë‹¤.");
+                MainGameDirector.pencil_clear = true;
+                SceneManager.LoadScene("NameScene"); // NameSceneìœ¼ë¡œ ì „í™˜
             }
         }
         else
         {
-            // ´Ù¸¥ ¾ÆÀÌÅÛ Å¬¸¯ ½Ã ÃÊ±âÈ­
-            Debug.Log($"´Ù¸¥ ¾ÆÀÌÅÛ({itemName}) Å¬¸¯: ÃÊ±âÈ­");
-            collectedCount = 0; // ¼öÁı °³¼ö ÃÊ±âÈ­
-            targetItem = ""; // ¸ñÇ¥ ¾ÆÀÌÅÛ ÃÊ±âÈ­
-            ResetItemDisplay(); // È­¸é ÃÊ±âÈ­
+            // ë‹¤ë¥¸ ì•„ì´í…œ í´ë¦­ ì‹œ ì´ˆê¸°í™”
+            Debug.Log($"ë‹¤ë¥¸ ì•„ì´í…œ({itemName}) í´ë¦­: ì´ˆê¸°í™”");
+            collectedCount = 0; // ìˆ˜ì§‘ ê°œìˆ˜ ì´ˆê¸°í™”
+            targetItem = ""; // ëª©í‘œ ì•„ì´í…œ ì´ˆê¸°í™”
+            ResetItemDisplay(); // í™”ë©´ ì´ˆê¸°í™”
         }
     }
 
     private void UpdateItemDisplay(string itemName)
     {
-        ResetItemDisplay(); // ±âÁ¸ Ç¥½Ã¸¦ ÃÊ±âÈ­
+        ResetItemDisplay(); // ê¸°ì¡´ í‘œì‹œë¥¼ ì´ˆê¸°í™”
 
         for (int i = 0; i < collectedCount; i++)
         {
-            // ¾ÆÀÌÅÛ ¾ÆÀÌÄÜÀ» Ç¥½Ã
+            // ì•„ì´í…œ ì•„ì´ì½˜ì„ í‘œì‹œ
             SpriteRenderer sr = itemDisplayPositions[i].GetComponent<SpriteRenderer>();
-            sr.sprite = GetItemIcon(itemName); // ÇØ´ç ¾ÆÀÌÅÛÀÇ ¾ÆÀÌÄÜ ¼³Á¤
-            sr.color = Color.white; // ¾ÆÀÌÄÜ Ç¥½Ã
+            sr.sprite = GetItemIcon(itemName); // í•´ë‹¹ ì•„ì´í…œì˜ ì•„ì´ì½˜ ì„¤ì •
+            sr.color = Color.white; // ì•„ì´ì½˜ í‘œì‹œ
         }
     }
 
     private void ResetItemDisplay()
     {
-        // ¾ÆÀÌÄÜ ÃÊ±âÈ­ (Åõ¸íÇÏ°Ô º¯°æ)
+        // ì•„ì´ì½˜ ì´ˆê¸°í™” (íˆ¬ëª…í•˜ê²Œ ë³€ê²½)
         foreach (Transform position in itemDisplayPositions)
         {
             SpriteRenderer sr = position.GetComponent<SpriteRenderer>();
@@ -74,7 +75,7 @@ public class ItemGameManager : MonoBehaviour
 
     private Sprite GetItemIcon(string itemName)
     {
-        // ¾ÆÀÌÅÛ ÀÌ¸§¿¡ µû¶ó ¾ÆÀÌÄÜ ¹İÈ¯
+        // ì•„ì´í…œ ì´ë¦„ì— ë”°ë¼ ì•„ì´ì½˜ ë°˜í™˜
         switch (itemName)
         {
             case "mouse": return itemIcons[0];

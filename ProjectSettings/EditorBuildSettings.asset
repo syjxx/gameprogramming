@@ -5,28 +5,43 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/StartScene.unity
+    path: Assets/Scenes/MainStartScene.unity
     guid: df4a3aca8f0614472902a05436f785a0
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: dd7de8434f4524f0a94205ccf0037acb
   - enabled: 1
+    path: Assets/Scenes/ClockGame.unity
+    guid: 4de3bcaed57e9b649ac3d130659135e3
+  - enabled: 1
+    path: Assets/Scenes/ClockGame2.unity
+    guid: dc5856c80da910249a6e3d49c5a4f4a3
+  - enabled: 1
+    path: Assets/Scenes/ClockHintScene.unity
+    guid: 7c7839f972279894480dc094cb169f38
+  - enabled: 1
+    path: Assets/Scenes/GameExplain.unity
+    guid: 91b878d0fb6ab453598e9803e7afef05
+  - enabled: 1
+    path: Assets/Scenes/FGameScene.unity
+    guid: 7e7c0bf079dca4547aceb290c4979680
+  - enabled: 1
+    path: Assets/Scenes/FHintScene.unity
+    guid: f713b3dd4c75b41a2a911a81594c9ab5
+  - enabled: 1
+    path: Assets/Scenes/FinishScene.unity
+    guid: c319efce856a542b6ba1afec0de29e27
+  - enabled: 1
+    path: Assets/Scenes/DieScene.unity
+    guid: 4a57940527c3e4457bee73eb29e42cec
+  - enabled: 1
     path: Assets/Scenes/ItemGameScene.unity
     guid: 90ddfb5e1533f5c4ca27f89231e7b8c1
-  - enabled: 0
-    path: Assets/NameScene_no.unity
-    guid: f768defc1676f4d439220afeecaa6908
   - enabled: 1
     path: Assets/Scenes/NameScene.unity
     guid: ed8649cf50f811948a9c085be70db408
   - enabled: 1
     path: Assets/Scenes/LastGameScene.unity
     guid: a370f7fa4741749cc8510032b8d93c42
-  - enabled: 1
-    path: Assets/Scenes/FinishScene.unity
-    guid: c319efce856a542b6ba1afec0de29e27
   m_configObjects: {}
