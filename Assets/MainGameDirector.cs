@@ -18,7 +18,7 @@ public class MainGameDirector : MonoBehaviour
 
     void Start(){
       //미니 게임을 실행하기 위한 오브젝트 불러오기.
-      this.clock = GameObject.Find("clock");
+      this.clock = GameObject.Find("clock_main");
       this.pencil = GameObject.Find("pencil");
       this.test_paper = GameObject.Find("test_paper");
       this.door = GameObject.Find("door");
