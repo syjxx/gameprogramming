@@ -10,6 +10,13 @@ public class MainGameDirector : MonoBehaviour
     GameObject pencil;
     GameObject test_paper;
     GameObject door;
+    
+    public GameObject Square; //드래그 앤 드롭으로 연결.(게임설명창)
+    public static bool isFirstRun = true; //처음 실행 여부 확인.
+    private float SquareDisplayTime = 0f; //처음 설명 박스 표시되는 시간.
+    public UnityEngine.UI.Text text;
+    private float messageDisplayTime = 0f; // 메시지가 표시되는 시간
+    private bool isMessageVisible = false; // 메시지가 현재 표시 중인지 여부
 
     //clear 확인 변수.
     public static bool clock_clear = false;
@@ -22,10 +29,29 @@ public class MainGameDirector : MonoBehaviour
       this.pencil = GameObject.Find("pencil");
       this.test_paper = GameObject.Find("test_paper");
       this.door = GameObject.Find("door");
+
+      if(isFirstRun){
+        Square.SetActive(true);
+        SquareDisplayTime = Time.time + 2f; //현재 시간 + 2초 후 Square 숨김.
+        isFirstRun = false;
+      }
     }
 
     void Update()
     {
+        // 시간이 지났고 Square가 현재 표시 중이라면 숨김
+        if (!isFirstRun && Time.time > SquareDisplayTime)
+        {
+            Square.SetActive(false);
+        }
+        // 메시지가 표시 중이고 시간이 지났는지 확인
+        if (isMessageVisible && Time.time >= messageDisplayTime)
+        {
+            text.gameObject.SetActive(false); // 메시지 숨김
+            isMessageVisible = false;
+        }
+
+
         //미니게임 찾아서 불러오기.
         if (Input.GetMouseButtonDown(0)) // 마우스 왼쪽 버튼 클릭
         {
@@ -33,27 +59,40 @@ public class MainGameDirector : MonoBehaviour
           Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
           //Collider2D.OverlapPoint()로 오브젝트가 클릭된 범위 내에 있는지 확인.
+          //Clock_clear : 시간맞추기 게임 clear 여부.
           if(!clock_clear && clock.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
-            //해당 Scene에서 clear시 GameDirector.clock_clear = true로 변환해주기.
             SceneManager.LoadScene("ClockGame");
           }
-          //pencil_clear == 같은그림맞추기 게임 clear 여부.
-          if(!pencil_clear && pencil.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
+          //pencil_clear : 같은그림맞추기 게임 clear 여부.
+          else if(!pencil_clear && pencil.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
             SceneManager.LoadScene("ItemGameScene");
           }
           //test_paper_clear : F피하기 게임 clear여부.
-          if(!test_paper_clear && test_paper.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
+          else if(!test_paper_clear && test_paper.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
             SceneManager.LoadScene("GameExplain");
+          //게임 오브젝트 클릭했으나 이미 클리어한 경우
+          }else if (clock.GetComponent<Collider2D>().OverlapPoint(clickPosition) || 
+                 pencil.GetComponent<Collider2D>().OverlapPoint(clickPosition) || 
+                 test_paper.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
+              ShowMessage("이미 클리어한 게임이야 다른 게임을 찾아봐!");
           }
-          
-          //퀴즈맞추기 최종 게임.
+
+
+          //문 클릭 시 퀴즈맞추기 최종 게임.
           if(door.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
-            if(clock_clear && pencil_clear && test_paper_clear){
-              SceneManager.LoadScene("lastGame"); //앞 3게임이 모두 클리어할 경우만 scene전환.
-            }else{ //하나라도 아니면 못넘어감.
-              Debug.Log("아직 종강할 때가 아니야!~");
+            if(clock_clear && pencil_clear && test_paper_clear){//3개 모두 클리어 시
+              SceneManager.LoadScene("lastGame"); 
+            }else{ //하나라도 클리어 못했을 경우.
+              ShowMessage("아직 종강할 때가 아니야~! 숨겨진 게임을 더 찾아봐!");
             }
           }
         }
+    }
+
+    void ShowMessage(string message){
+      text.text = message;
+      text.gameObject.SetActive(true);
+      isMessageVisible = true; 
+      messageDisplayTime = Time.time + 3f; // 현재 시간 + 3초 후에 메시지 숨김
     }
 }
