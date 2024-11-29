@@ -81,7 +81,7 @@ public class MainGameDirector : MonoBehaviour
           //문 클릭 시 퀴즈맞추기 최종 게임.
           if(door.GetComponent<Collider2D>().OverlapPoint(clickPosition)){
             if(clock_clear && pencil_clear && test_paper_clear){//3개 모두 클리어 시
-              SceneManager.LoadScene("lastGame"); 
+              SceneManager.LoadScene("LastGameScene"); 
             }else{ //하나라도 클리어 못했을 경우.
               ShowMessage("아직 종강할 때가 아니야~! 숨겨진 게임을 더 찾아봐!");
             }
