@@ -15,8 +15,9 @@ public class WordPuzzleDirector : MonoBehaviour
   private GameObject[] currentAnswers;
   //정답 저장 배열
   public string[] correctAnswers;
-  public Text text;//정답이 틀릴 경우 출력할 텍스트 UI
-
+  public GameObject hint; //hint 화면
+  public Text hintText;//정답이 틀릴 경우 출력할 텍스트 UI
+  
 
   void Start(){
     //정답 리스트 초기화
@@ -37,7 +38,10 @@ public class WordPuzzleDirector : MonoBehaviour
     currentAnswers = new GameObject[correctAnswers.Length];
 
     //텍스트 ui를 비활성화(처음에는 보이지 않도록 설정).
-    text.enabled = false;
+    hintText.enabled = false;
+
+    //hint 숨김
+    hint.SetActive(false);
 }
 
   void Update()
@@ -58,6 +62,12 @@ public class WordPuzzleDirector : MonoBehaviour
           CheckAnswer(); //정답 확인
         }
       }
+    }
+
+    if(Input.GetKey(KeyCode.Space)){
+      hint.SetActive(true);
+    }else{
+      hint.SetActive(false);
     }
   }
 
@@ -95,7 +105,7 @@ public class WordPuzzleDirector : MonoBehaviour
 
     for (int i = 0; i<correctAnswers.Length; i++){
       //currentAnswer와 correctAnswers의 순서와 값이 동일한지 비교.
-      if(currentAnswers[i].name == correctAnswers[i]){
+      if(currentAnswers[i].name == correctAnswers[i] && currentAnswers != null){
         isCorrect = true; //정답
       }else{
         isCorrect = false; //오답 발견되면 루프 종료
@@ -109,7 +119,7 @@ public class WordPuzzleDirector : MonoBehaviour
       SceneManager.LoadScene("FinishScene"); 
     }else{
       //오답인 경우 텍스트 표시 및 타일 초기화
-      text.enabled = true;
+      hintText.enabled = true;
       Invoke("ResetTiles", 2f); // 2초 후에 타일 재설정 함수 호출
     }
   }
@@ -124,7 +134,7 @@ public class WordPuzzleDirector : MonoBehaviour
     }
     //currentAnswers 배열 초기화
     currentAnswers = new GameObject[correctAnswers.Length];
-    text.enabled = false;
+    hintText.enabled = false;
   }
 
 }
