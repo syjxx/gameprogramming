@@ -120,12 +120,12 @@ public class WordPuzzleDirector : MonoBehaviour
     }else{
       //오답인 경우 텍스트 표시 및 타일 초기화
       hintText.enabled = true;
-      Invoke("ResetTiles", 2f); // 2초 후에 타일 재설정 함수 호출
+      Invoke("ResetWords", 2f); // 2초 후에 타일 재설정 함수 호출
     }
   }
 
-  //타일을 초기 위치로 재설정하는 함수
-  private void ResetTiles(){
+  //글자를 초기 위치로 재설정하는 함수
+  private void ResetWords(){
     // currentAnswers 배열에 있는 단어들을 초기 위치로 되돌림
     for(int i = 0; i< currentAnswers.Length; i++){
       if (currentAnswers[i] != null){

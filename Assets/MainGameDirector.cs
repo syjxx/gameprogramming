@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 //강의실 화면에서 클릭시 각 게임 가져오기.
 public class MainGameDirector : MonoBehaviour
 {
-    GameObject clock;
-    GameObject pencil;
-    GameObject test_paper;
-    GameObject door;
+    public GameObject clock;
+    public GameObject pencil;
+    public GameObject test_paper;
+    public GameObject door;
     
-    public GameObject Square; //드래그 앤 드롭으로 연결.(게임설명창)
+    public GameObject Square;
     public static bool isFirstRun = true; //처음 실행 여부 확인.
     private float SquareDisplayTime = 0f; //처음 설명 박스 표시되는 시간.
     public UnityEngine.UI.Text text;
@@ -24,15 +24,9 @@ public class MainGameDirector : MonoBehaviour
     public static bool test_paper_clear = false;
 
     void Start(){
-      //미니 게임을 실행하기 위한 오브젝트 불러오기.
-      this.clock = GameObject.Find("clock_main");
-      this.pencil = GameObject.Find("pencil");
-      this.test_paper = GameObject.Find("test_paper");
-      this.door = GameObject.Find("door");
-
       if(isFirstRun){
         Square.SetActive(true);
-        SquareDisplayTime = Time.time + 2f; //현재 시간 + 2초 후 Square 숨김.
+        SquareDisplayTime = Time.time + 5f; //현재 시간 + 5초 후 Square 숨김.
         isFirstRun = false;
       }
     }
