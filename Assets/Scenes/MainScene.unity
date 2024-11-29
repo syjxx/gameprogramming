@@ -151,6 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9580aa2156c074030a4b084a3819b8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clock: {fileID: 1132851444}
+  pencil: {fileID: 1150722776}
+  test_paper: {fileID: 1229067446}
+  door: {fileID: 460272710}
   Square: {fileID: 1055277263}
   text: {fileID: 1097007390}
 --- !u!4 &90176449
