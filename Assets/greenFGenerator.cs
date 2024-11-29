@@ -14,8 +14,20 @@ public class greenFGenerator : MonoBehaviour
     private float screenMinY = -5f;
     private float screenMaxY = 5f;
 
+    GameObject director;
+
+    void Start() 
+    {
+        this.director = GameObject.Find("GameDirector");
+    }
+
     void Update()
     {
+        if (director.GetComponent<GameDirector>().isGameRunning == false)
+        {
+            return;
+        }
+
         delta += Time.deltaTime;
         if (delta > span)
         {

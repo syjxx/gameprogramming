@@ -13,16 +13,30 @@ public class GameDirector : MonoBehaviour
 
     GameObject hpGauge;
 
+    public bool isGameRunning = false;
+
     void Start()
     {
         this.timerText = GameObject.Find("Time");
         this.hpGauge = GameObject.Find("hpGauge");
+        ShowStartMessage();
     }
 
 
 
     void Update()
     {
+        if (!isGameRunning)
+        {
+            // Space 키로 게임 시작
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isGameRunning = true;
+                HideStartMessage();
+            }
+            return;
+        }
+
         this.time -= Time.deltaTime;
         this.timerText.GetComponent<Text>().text = this.time.ToString("F1"); 
 
@@ -36,7 +50,7 @@ public class GameDirector : MonoBehaviour
 
     public void isGameOver() {
         if( this.hpGauge.GetComponent<Image>().fillAmount < 0.1f){
-            SceneManager.LoadScene("DieScene");
+            SceneManager.LoadScene("FGameScene");
         }
     }
 
@@ -47,6 +61,25 @@ public class GameDirector : MonoBehaviour
     public void IncreaseHp() {
         if (this.hpGauge.GetComponent<Image>().fillAmount < 1.0f ){
             this.hpGauge.GetComponent<Image>().fillAmount += 0.2f;
+        }
+    }
+
+    void ShowStartMessage()
+    {
+        GameObject startMessage = GameObject.Find("StartMessage");
+        if (startMessage != null)
+        {
+            startMessage.GetComponent<Text>().text = "Press SPACE to Start!";
+        }
+    }
+
+    
+    void HideStartMessage()
+    {
+        GameObject startMessage = GameObject.Find("StartMessage");
+        if (startMessage != null)
+        {
+            startMessage.GetComponent<Text>().text = "";
         }
     }
 }
