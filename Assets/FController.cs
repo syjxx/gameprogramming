@@ -13,10 +13,6 @@ public class FController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // float x = Random.Range(-11,12);
-        // float y = Random.Range(-5,6);
-        // transform.Translate(0.1f,-0.1f,0);
-
         objectDestroy();
     }
     

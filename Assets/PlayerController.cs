@@ -9,13 +9,21 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rigid2D;
     Vector2 moveInput;
 
+    GameObject director;
+
     void Start()
     {
         rigid2D = GetComponent<Rigidbody2D>(); // Rigidbody2D 컴포넌트 가져오기
+        this.director = GameObject.Find("GameDirector");
     }
 
     void Update()
     {
+        if (director.GetComponent<GameDirector>().isGameRunning == false)
+        {
+            return;
+        }
+
         // 키보드 입력 받기
         moveInput.x = Input.GetAxisRaw("Horizontal"); // 왼쪽, 오른쪽 화살표 키
         moveInput.y = Input.GetAxisRaw("Vertical");   // 위, 아래 화살표 키
